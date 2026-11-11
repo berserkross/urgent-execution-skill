@@ -62,14 +62,12 @@ Turn the current session ON:
 
 ```text
 【急急如律令】
-Please complete ...
 ```
 
 Turn it OFF:
 
 ```text
 【return 0】
-Continue ...
 ```
 
 The command must occupy the **first physical line** exactly, with no leading/trailing spaces, quotes, code fences, or other characters. The task starts on the second line.
