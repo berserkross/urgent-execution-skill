@@ -1,0 +1,17 @@
+# Changelog
+
+本项目的重要变更记录在此文件中。
+
+格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，
+版本号遵循 [Semantic Versioning](https://semver.org/lang/zh-CN/)。
+
+## [Unreleased]
+
+## [1.0.0] - 2026-11-11
+
+### Added
+
+- `urgent-execution/SKILL.md`：共享核心，定义首行口令、会话状态与 ON 执行策略。
+- `03-通用安装交付文档.md`：通用安装流程、Claude Code / DSH 适配路线与参考状态函数。
+- `02-编写迭代与验证报告.md`：设计决策、45/45 状态函数检查、待验收项与性能比较方案。
+- 首次公开发布。
