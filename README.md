@@ -108,7 +108,7 @@ ON 时，技能要求 Agent 在满足显性需求和必要验证的前提下，�
 
 - 技能格式：Markdown + YAML frontmatter；
 - 无运行时依赖，不绑定模型、API、工具名称或安装路径；
-- 已在 Claude Code、DeepSeek Harness、OpenAI Codex、DeepTutor 的技能体系上验证装载；
+- 提供 Claude Code、DeepSeek Harness、OpenAI Codex、DeepTutor 的装载路径；行为验收项见 [02-编写迭代与验证报告.md](02-编写迭代与验证报告.md)；
 - Windows / macOS / Linux 均可使用，路径按各自宿主规则解析。
 
 ## 版本与变更
