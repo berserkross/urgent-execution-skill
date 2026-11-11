@@ -32,7 +32,10 @@ ON 时，技能要求 Agent 在满足显性需求和必要验证的前提下，�
 
 ```text
 .
-├── README.md
+├── README.md          # 英文
+├── README.zh-CN.md    # 简体中文（本文件）
+├── INSTALL.md         # 英文安装指南
+├── INSTALL.zh-CN.md   # 安装指南（本文件）
 ├── LICENSE
 ├── CHANGELOG.md
 ├── .gitignore
@@ -44,7 +47,7 @@ ON 时，技能要求 Agent 在满足显性需求和必要验证的前提下，�
 
 > 两份文档保留在根目录，是为了让 `SKILL.md` 中的路径引用保持有效，也不影响已经安装到各宿主的核心文件哈希。
 
-## 快速开始
+## 快速开始（手动）
 
 | 宿主 | 技能文件 | 路由 / 适配 |
 |---|---|---|
@@ -54,6 +57,29 @@ ON 时，技能要求 Agent 在满足显性需求和必要验证的前提下，�
 | DeepTutor | 账号级技能根 `<skills>/urgent-execution/SKILL.md` | 同根 `urgent-execution-router/SKILL.md`（`always: true`） |
 
 > 各宿主版本的路径、配置文件和合并方式可能不同。安装前请先读 [03-通用安装交付文档.md](03-通用安装交付文档.md)，按实际版本确认根目录与入口，不要直接照抄路径。
+
+每个宿主的完整手动步骤见 [INSTALL.zh-CN.md](INSTALL.zh-CN.md)。
+
+## 让 Agent 自己安装
+
+把下面这段 prompt 复制给你正在使用的 Agent（Claude Code / DSH / Codex / DeepTutor）。它只会为当前宿主安装；四个宿主都想要，就在每个宿主里各跑一次。
+
+```text
+你正在为你自己所在的 harness 安装 urgent-execution 技能。
+
+来源仓库：https://github.com/berserkross/urgent-execution-skill
+先阅读仓库中的 INSTALL.zh-CN.md。
+
+1. 识别你的宿主（Claude Code / DeepSeek Harness / OpenAI Codex / DeepTutor）、版本，以及实际的技能目录与全局指令入口。
+2. 备份所有将修改的文件；不要覆盖无关内容。
+3. 把 urgent-execution/SKILL.md 复制到当前宿主正确的技能目录。
+4. 按 INSTALL.zh-CN.md 把短路由写入正确的全局指令入口；DeepTutor 则安装 always: true 的 router 技能。
+5. 不要修改模型 endpoint、凭据、权限或无关设置。
+6. 验证技能文件、YAML frontmatter 和路由；报告实际路径、已验证项、未验证项和已知限制（严格来源/状态适配是尽力而为）。
+7. 需要审批或被权限阻止时停下报告，不要绕过权限。
+```
+
+让 Agent 报告实际路径、已验证项、未验证项和限制。如果它声称已做严格来源/状态验证，请让它给出宿主级 hook 和状态文件；本包不包含这些。
 
 ## 使用方式
 
@@ -136,4 +162,4 @@ ON 时，技能要求 Agent 在满足显性需求和必要验证的前提下，�
 
 ## English
 
-A full English README is available at [README.md](README.md).
+A full English README is available at [README.md](README.md); the English installation guide is at [INSTALL.md](INSTALL.md).

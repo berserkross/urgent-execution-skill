@@ -34,6 +34,8 @@ When ON, the skill asks the agent to minimize time-to-verified-delivery while me
 .
 ├── README.md          # English (this file)
 ├── README.zh-CN.md    # 简体中文
+├── INSTALL.md         # per-host manual install
+├── INSTALL.zh-CN.md   # 安装指南（中文）
 ├── LICENSE
 ├── CHANGELOG.md
 ├── .gitignore
@@ -45,7 +47,7 @@ When ON, the skill asks the agent to minimize time-to-verified-delivery while me
 
 > The two documents remain at the repository root so that path references inside `SKILL.md` stay valid and the hashes of installed copies do not change.
 
-## Quick start
+## Quick start (manual)
 
 | Host | Skill file | Route / adapter |
 |---|---|---|
@@ -55,6 +57,29 @@ When ON, the skill asks the agent to minimize time-to-verified-delivery while me
 | DeepTutor | account-level skill root `<skills>/urgent-execution/SKILL.md` | `urgent-execution-router/SKILL.md` (with `always: true`) in the same root |
 
 > Paths and configuration files vary by host version. Read [03-通用安装交付文档.md](03-通用安装交付文档.md) (in Chinese) and confirm the actual root and entry point before installing; do not copy paths blindly.
+
+Full manual steps for each host: [INSTALL.md](INSTALL.md).
+
+## Let your agent install it
+
+Copy this prompt into the agent you are running (Claude Code, DSH, Codex, or DeepTutor). It installs only for that harness; run it once in each harness if you want all four.
+
+```text
+You are installing the "urgent-execution" skill for the harness you are running in.
+
+Source repository: https://github.com/berserkross/urgent-execution-skill
+Read INSTALL.md in that repository first.
+
+1. Detect your harness (Claude Code, DeepSeek Harness, OpenAI Codex, or DeepTutor), its version, and the actual skill and global-instruction paths.
+2. Back up every file you will modify. Do not overwrite unrelated content.
+3. Copy urgent-execution/SKILL.md to the correct skill directory for your harness.
+4. Add the short route from INSTALL.md to the correct global instruction entry; for DeepTutor, install the always-on router skill instead.
+5. Do not change model endpoints, credentials, permissions, or unrelated settings.
+6. Verify the skill file, YAML frontmatter, and route; then report the exact paths, what you verified, what you could not verify, and the known limitations (strict origin/state adaptation is best-effort).
+7. If a step needs approval or is blocked by permissions, stop and report it. Do not bypass permissions.
+```
+
+Ask the agent to report the exact paths, what it verified, and what it could not verify. If it claims strict origin/state verification, ask for the host-level hook and state file; this package does not include them.
 
 ## Usage
 
@@ -137,4 +162,4 @@ Issues and pull requests are welcome. If you change the activation protocol or e
 
 ## Chinese documentation
 
-The Chinese README is at [README.zh-CN.md](README.zh-CN.md). The detailed installation and validation documents are currently in Chinese: [03-通用安装交付文档.md](03-通用安装交付文档.md) and [02-编写迭代与验证报告.md](02-编写迭代与验证报告.md).
+The Chinese README is at [README.zh-CN.md](README.zh-CN.md), and the Chinese installation guide is at [INSTALL.zh-CN.md](INSTALL.zh-CN.md). The detailed installation and validation documents are currently in Chinese: [03-通用安装交付文档.md](03-通用安装交付文档.md) and [02-编写迭代与验证报告.md](02-编写迭代与验证报告.md).

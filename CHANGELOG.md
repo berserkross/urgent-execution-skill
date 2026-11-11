@@ -11,6 +11,8 @@
 
 - README 增加“为什么用这个口令”一节，说明低频词、全角中括号与首行独占的误触发防护。
 - README 补充安装验证措辞的澄清。
+- `INSTALL.md` / `INSTALL.zh-CN.md`：四宿主手动安装步骤与 Agent 自安装 prompt。
+- README（中英）增加“让 Agent 自己安装”小节，并链接 INSTALL 文档。
 
 ### Changed
 
