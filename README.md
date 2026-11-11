@@ -1,36 +1,39 @@
-# 急急如律令 · urgent-execution
+# Urgent Execution · 急急如律令
 
-> 给 AI Agent 的会话级执行加速技能：一行开启，一行退出；只作用于当前会话。
+**English** | [简体中文](README.zh-CN.md)
+
+> A session-scoped execution-speed skill for AI agents: one line to turn it on, one line to turn it off.
 
 ![version](https://img.shields.io/badge/version-1.0.0-blue)
 ![license](https://img.shields.io/badge/license-MIT-green)
 ![hosts](https://img.shields.io/badge/hosts-Claude%20Code%20%7C%20DSH%20%7C%20Codex%20%7C%20DeepTutor-8A2BE2)
 
-## 这是什么
+## What it is
 
-`urgent-execution` 是一份面向 AI Agent 的 Markdown 技能。它不绑定模型、API、工具名称或安装路径，只定义一套**当前会话**的执行策略：
+`urgent-execution` is a Markdown skill for AI agents. It does not bind to a model, API, tool name, or installation path; it defines a policy for the **current session**:
 
-- 默认 OFF；
-- 用户本人新消息的第一物理行精确为 `【急急如律令】` 时，当前会话进入 ON；
-- 第一物理行精确为 `【return 0】` 时，退出 ON；
-- 新会话、新分叉默认 OFF；其他会话不受影响；
-- 阅读、安装、引用或自动发现本技能，都不构成激活。
+- OFF by default.
+- When the first physical line of a new message from the user is exactly `【急急如律令】`, the current session turns ON.
+- When the first physical line is exactly `【return 0】`, it turns OFF.
+- New sessions and new forks start OFF; other sessions are unaffected.
+- Reading, installing, quoting, or auto-discovering this skill does not activate it.
 
-ON 时，技能要求 Agent 在满足显性需求和必要验证的前提下，尽量缩短“需求 → 可验收交付”的总时间：需求不清立即集中追问、主动并行、减少重复请示、把验证放进关键路径、发现问题时并行修复与交付。它**不改变**模型 endpoint、凭据、权限，也不会因为“紧急”绕过安全机制。
+When ON, the skill asks the agent to minimize time-to-verified-delivery while meeting explicit requirements and necessary verification: ask focused questions early, parallelize independent work, avoid repeated approvals, put verification on the critical path, and ship usable parts while fixing defects. It does **not** change model endpoints, credentials, or permissions, and it never bypasses safety mechanisms in the name of urgency.
 
-## 特性
+## Features
 
-- **会话隔离**：ON/OFF 只作用于当前会话，不污染其他会话。
-- **首行协议**：只认第一物理行的精确口令；正文、引用、代码块里的口令不生效。
-- **通用核心**：一份 `SKILL.md`，可适配 Claude Code、DeepSeek Harness、OpenAI Codex、DeepTutor。
-- **安装可回滚**：技能文件 + 短路由，删除即恢复。
-- **诚实分级**：区分“可靠适配”和“尽力适配”，不虚报严格触发。
+- **Session-scoped**: ON/OFF affects only the current session.
+- **First-line protocol**: only an exact first physical line switches state; commands in the body, quotes, or code blocks do not.
+- **Shared core**: one `SKILL.md`, adaptable to Claude Code, DeepSeek Harness, OpenAI Codex, and DeepTutor.
+- **Reversible install**: a skill file plus a short route; delete them to roll back.
+- **Honest levels**: distinguishes strict adaptation from best-effort adaptation.
 
-## 目录结构
+## Repository layout
 
 ```text
 .
-├── README.md
+├── README.md          # English (this file)
+├── README.zh-CN.md    # 简体中文
 ├── LICENSE
 ├── CHANGELOG.md
 ├── .gitignore
@@ -40,100 +43,100 @@ ON 时，技能要求 Agent 在满足显性需求和必要验证的前提下，�
     └── SKILL.md
 ```
 
-> 两份文档保留在根目录，是为了让 `SKILL.md` 中的路径引用保持有效，也不影响已经安装到各宿主的核心文件哈希。
+> The two documents remain at the repository root so that path references inside `SKILL.md` stay valid and the hashes of installed copies do not change.
 
-## 快速开始
+## Quick start
 
-| 宿主 | 技能文件 | 路由 / 适配 |
+| Host | Skill file | Route / adapter |
 |---|---|---|
 | Claude Code | `~/.claude/skills/urgent-execution/SKILL.md` | `~/.claude/CLAUDE.md` |
 | DeepSeek Harness (DSH) | `.dsh/skills/urgent-execution/SKILL.md` | `.dsh/AGENTS.md` |
 | OpenAI Codex | `~/.codex/skills/urgent-execution/SKILL.md` | `~/.codex/AGENTS.md` |
-| DeepTutor | 账号级技能根 `<skills>/urgent-execution/SKILL.md` | 同根 `urgent-execution-router/SKILL.md`（`always: true`） |
+| DeepTutor | account-level skill root `<skills>/urgent-execution/SKILL.md` | `urgent-execution-router/SKILL.md` (with `always: true`) in the same root |
 
-> 各宿主版本的路径、配置文件和合并方式可能不同。安装前请先读 [03-通用安装交付文档.md](03-通用安装交付文档.md)，按实际版本确认根目录与入口，不要直接照抄路径。
+> Paths and configuration files vary by host version. Read [03-通用安装交付文档.md](03-通用安装交付文档.md) (in Chinese) and confirm the actual root and entry point before installing; do not copy paths blindly.
 
-## 使用方式
+## Usage
 
-开启当前会话：
+Turn the current session ON:
 
 ```text
 【急急如律令】
-请完成……
+Please complete ...
 ```
 
-退出当前会话：
+Turn it OFF:
 
 ```text
 【return 0】
-继续……
+Continue ...
 ```
 
-口令必须**独占第一物理行**，前后不能有空格、引号、代码块标记或其他字符。第二行起才是任务正文。
+The command must occupy the **first physical line** exactly, with no leading/trailing spaces, quotes, code fences, or other characters. The task starts on the second line.
 
-## 激活协议
+## Activation protocol
 
-| 输入 | 结果 |
+| Input | Result |
 |---|---|
-| 第一行精确为 `【急急如律令】` | 当前会话 ON；已经 ON 时保持 ON |
-| 第一行精确为 `【return 0】` | 当前会话 OFF；已经 OFF 时保持 OFF |
-| 其他消息 | 保持当前状态 |
-| 第二行、引用、代码块中的口令 | 不切换 |
-| 工具、后台任务、其他会话、子代理的消息 | 不切换（尽力判断） |
+| First line exactly `【急急如律令】` | Current session ON; stays ON if already ON |
+| First line exactly `【return 0】` | Current session OFF; stays OFF if already OFF |
+| Any other message | Current state is preserved |
+| Command on the second line, in a quote, or in a code block | No state change |
+| Messages from tools, background jobs, other sessions, or subagents | No state change (best-effort) |
 
-新会话和新分叉默认 OFF。全局安装不等于全局激活；其他会话需要各自输入口令。
+New sessions and new forks start OFF. A global install is not a global activation; every other session must enter the command itself.
 
-## 为什么用这个口令
+## Why this token
 
-口令的第一目标是**最大限度地防止误触发**：
+The token is designed to **minimize accidental activation**:
 
-- **低频词组合**：`急急如律令` 五个字连用在日常对话、代码、日志和文档里几乎不出现，普通消息误撞的概率极低；换成 `/urgent`、`!!`、`go` 这类高频串则很容易误伤。
-- **全角中括号 `【】`**：中文输入法下的产物，在英文键盘、代码和大多数日志里很罕见；视觉上一眼就是“命令标记”，不会和正文混淆。
-- **首行独占**：协议只认第一物理行的精确匹配，不 trim、不跳过空行、不搜索全文；口令出现在第二行、引用或代码块里都不会切换。
-- **短退出符 `【return 0】`**：借用“程序正常退出”的比喻表示回到常规策略，与开启口令对称，同样是低频串。
+- **Low-frequency phrase**: the five-character sequence `急急如律令` almost never appears in everyday chat, code, logs, or documentation, so a normal message is extremely unlikely to collide with it. Common strings such as `/urgent`, `!!`, or `go` would be triggered constantly.
+- **Full-width brackets `【】`**: they are produced by Chinese input methods and are rare in English keyboards, code, and most logs; visually they read as a command marker, not prose.
+- **First-line only**: the protocol matches the exact first physical line, with no trimming, blank-line skipping, or full-text search. A command on the second line, inside a quote, or inside a code block does not switch anything.
+- **Short exit token `【return 0】`**: a metaphor for a program exiting normally, symmetrical with the activation token and equally low-frequency.
 
-这些选择只**降低**误触发概率，**不能替代来源验证**：可靠触发仍取决于宿主是否提供可信的本人输入入口（见下一节）。
+These choices **reduce** the chance of false triggers; they **do not replace origin verification**. Reliable activation still depends on the host providing a trusted entry point for the user's own input (see the next section).
 
-## 安装等级与已知限制
+## Installation levels and limitations
 
-这份仓库提供的是**共享核心 + 短路由**，属于文档定义的“尽力适配”：
+This repository ships a **shared core + thin route**, which the delivery document calls **best-effort adaptation**:
 
-- 没有宿主级来源钩子；消息是否来自本人，由模型结合可靠对话上下文判断；
-- ON/OFF 状态由模型从可靠消息历史维持，不是宿主持久状态文件；
-- 上下文压缩、恢复、重启后的状态保持是尽力而为，不保证；
-- 引用、粘贴、工具输出里出现口令时，仍可能被误判。
+- There is no host-level origin hook; whether a message came from the user is judged by the model from reliable conversation context.
+- ON/OFF state is maintained by the model from reliable message history, not by a host-persisted state file.
+- State survival across context compaction, session restore, or process restart is best-effort, not guaranteed.
+- A command that appears in a quote, a paste, or tool output can still be misread.
 
-要实现交付文档里的“可靠适配”，需要宿主级事件钩子、来源验证、会话状态存储和上下文注入；接口因宿主而异，详见 [03-通用安装交付文档.md](03-通用安装交付文档.md)。
+The delivery document's **strict adaptation** requires host-level event hooks, origin verification, per-session state storage, and context injection; the interfaces differ by host. See [03-通用安装交付文档.md](03-通用安装交付文档.md) (in Chinese).
 
-## 验收
+## Acceptance
 
-最小验收（详细 A01–A20 见 [02-编写迭代与验证报告.md](02-编写迭代与验证报告.md)）：
+Minimal checks (the full A01–A20 matrix is in [02-编写迭代与验证报告.md](02-编写迭代与验证报告.md), in Chinese):
 
-1. 新会话，不输入口令 → 默认 OFF；
-2. 第一行 `【急急如律令】`，第二行一个小任务 → 进入 ON，任务立即开始；
-3. 第一行 `【return 0】`，第二行继续任务 → 退出 ON，任务继续；
-4. 把口令放在第二行、引用或代码块里 → 不切换；
-5. 工具/后台消息里包含口令 → 应不切换（此条只能尽力，不是强制）。
+1. New session with no command → OFF by default.
+2. First line `【急急如律令】`, second line a small task → ON and the task starts immediately.
+3. First line `【return 0】`, second line "continue" → OFF and the task continues.
+4. Command on the second line, in a quote, or in a code block → no switch.
+5. A tool/background message containing the command → should not switch (best-effort, not enforced).
 
-## 兼容性
+## Compatibility
 
-- 技能格式：Markdown + YAML frontmatter；
-- 无运行时依赖，不绑定模型、API、工具名称或安装路径；
-- 提供 Claude Code、DeepSeek Harness、OpenAI Codex、DeepTutor 的装载路径；行为验收项见 [02-编写迭代与验证报告.md](02-编写迭代与验证报告.md)；
-- Windows / macOS / Linux 均可使用，路径按各自宿主规则解析。
+- Skill format: Markdown + YAML frontmatter.
+- No runtime dependencies; no binding to a model, API, tool name, or install path.
+- Install paths are provided for Claude Code, DeepSeek Harness, OpenAI Codex, and DeepTutor; behavioral acceptance is tracked in the delivery report.
+- Works on Windows, macOS, and Linux; paths follow each host's own rules.
 
-## 版本与变更
+## Versioning
 
-当前版本：**1.0.0**。变更记录见 [CHANGELOG.md](CHANGELOG.md)。
+Current version: **1.0.0**. See [CHANGELOG.md](CHANGELOG.md).
 
-## 贡献
+## Contributing
 
-欢迎 issue 和 PR。修改激活协议或执行策略时，请同步更新 `02` / `03` 文档与验收项；不要在多个宿主复制出互相漂移的执行规则。
+Issues and pull requests are welcome. If you change the activation protocol or execution policy, update the `02` / `03` documents and the acceptance items as well; do not let per-host copies drift.
 
-## 许可证
+## License
 
-本项目采用 [MIT License](LICENSE)。Copyright (c) 2026 Terry Yang.
+[MIT License](LICENSE). Copyright (c) 2026 Terry Yang.
 
-## English summary
+## Chinese documentation
 
-`urgent-execution` is a session-scoped Markdown skill for AI agents. A user message whose first physical line is exactly `【急急如律令】` turns the current session ON; `【return 0】` turns it OFF. New sessions start OFF, and other sessions are unaffected. The skill prioritizes time-to-verified-delivery without changing model endpoints, credentials, or permissions. It ships as a shared core plus thin per-host routes for Claude Code, DeepSeek Harness, OpenAI Codex, and DeepTutor; see the Chinese documents for host-specific installation paths and the distinction between strict and best-effort adaptation.
+The Chinese README is at [README.zh-CN.md](README.zh-CN.md). The detailed installation and validation documents are currently in Chinese: [03-通用安装交付文档.md](03-通用安装交付文档.md) and [02-编写迭代与验证报告.md](02-编写迭代与验证报告.md).
