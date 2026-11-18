@@ -171,3 +171,7 @@ The core is portable to agents that can load Markdown instructions. The four doc
 The activation line expresses a preference for Fast in the current session. A trusted submitting client can request it before a new turn when the selected model advertises Fast. Keep the selected model and reasoning effort. On exit, omit the override and inherit the user's current speed. The standard Markdown installation accelerates the workflow and leaves native speed selection to the user. Report a request as confirmed only when the service reports the tier actually used.
 
 For custom Codex app-server clients, see [the optional turn parameter helper](adapters/codex_speed.py). The standard desktop installer does not register a request interceptor. Other hosts use the shared workflow until their request paths are verified.
+
+## Measured performance
+
+In a Claude Code test through a DeepSeek V4 Pro gateway, the median time to finish a fixed 320-token answer was 4.30 s without the skill and 6.26 s on first activation (five runs per condition). Visible output took 1.30 s and 1.31 s respectively. Two resumed file-review trials returned the correct numbers but skipped the requested reread. The DSH and DeepTutor samples were too small to establish a speed effect. [Full report (Chinese)](benchmarks/2026-11-19/report.zh-CN.md) · [Per-trial data](benchmarks/2026-11-19/trials.csv)
