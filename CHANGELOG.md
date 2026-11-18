@@ -7,6 +7,11 @@
 
 ## [Unreleased]
 
+### Added
+
+- 发布 2026-11-19 四宿主安装同步报告与机器可读清单，记录 Codex、Claude Code、DeepSeek Harness、DeepTutor 和共享 Agent 镜像的版本、哈希、路由、验证边界与回滚方式。
+- README 中英文版增加最新部署检查入口，并明确同步验证不等于原生 Fast 或严格消息来源认证。
+
 ## [1.1.0] - 2026-11-19
 
 - Session-scoped native Fast preference, optional Codex request helper, bilingual setup notes and automated protocol checks.

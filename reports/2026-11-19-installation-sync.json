@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-19",
+  "repository": "berserkross/urgent-execution-skill",
+  "source_commit": "574da6853213fd559d01450c6ec883da7bc218cd",
+  "artifact": {
+    "path": "urgent-execution/SKILL.md",
+    "version": "1.1.0",
+    "format": "markdown+yaml-frontmatter",
+    "sha256": "3E2D8521FA249DA7C969D14811DA06B187D65BC1DBB3D86657409B051F000861"
+  },
+  "hosts": [
+    {
+      "name": "OpenAI Codex",
+      "version": "app-server 0.167.2",
+      "result": "already-current",
+      "skill_path_template": "~/.codex/skills/urgent-execution/SKILL.md",
+      "route_template": "~/.codex/AGENTS.md"
+    },
+    {
+      "name": "Claude Code",
+      "version": "2.1.316",
+      "result": "updated-from-1.0.0",
+      "skill_path_template": "~/.claude/skills/urgent-execution/SKILL.md",
+      "route_template": "~/.claude/CLAUDE.md"
+    },
+    {
+      "name": "DeepSeek Harness",
+      "version": "0.2.2-rc.5",
+      "result": "updated-from-1.0.0",
+      "skill_path_template": "$DSH_HOME/skills/urgent-execution/SKILL.md",
+      "route_template": "$DSH_HOME/AGENTS.md"
+    },
+    {
+      "name": "DeepTutor",
+      "version": "1.7.2",
+      "result": "updated-from-1.0.0",
+      "skill_path_template": "<account-skill-root>/urgent-execution/SKILL.md",
+      "route_template": "<account-skill-root>/urgent-execution-router/SKILL.md"
+    },
+    {
+      "name": "Shared agent mirror",
+      "version": "host-independent",
+      "result": "updated-from-1.0.0",
+      "skill_path_template": "~/.agents/skills/urgent-execution/SKILL.md",
+      "route_template": "host-owned"
+    }
+  ],
+  "checks": {
+    "remote_fetched": true,
+    "local_head_matches_origin_main": true,
+    "installed_hashes_match_artifact": true,
+    "routes_present": true,
+    "protocol_tests": "45/45",
+    "fast_parameter_tests": "40/40",
+    "deeptutor_skill_service_discovery": [
+      "urgent-execution",
+      "urgent-execution-router"
+    ],
+    "backup_suffix": ".bak-20261119-before-v1.1.0",
+    "secret_pattern_scan_hits": 0
+  },
+  "compatibility": {
+    "model_or_provider_hardcoded": false,
+    "native_fast_claimed_without_host_support": false,
+    "deeptutor_provider_neutral": true
+  },
+  "limitations": [
+    "Trusted source identity and session recovery remain best effort until each host implements a host-level adapter.",
+    "Markdown installation does not create a provider Fast tier.",
+    "Skill loading and extra verification can increase token use and latency on short tasks.",
+    "Fresh-session reload and the full A01-A20 matrix still require confirmation in each interactive host."
+  ]
+}

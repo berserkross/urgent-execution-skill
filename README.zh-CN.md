@@ -175,3 +175,7 @@ Codex app-server 客户端可在 turn/start 前使用仓库的 adapters/codex_sp
 ## 实测性能
 
 Claude Code 经网关调用 DeepSeek V4 Pro 时，固定 320 个可见 token 的任务，未安装与首次开启的整轮耗时中位数分别为 4.30 秒和 6.26 秒（每组五次），可见输出阶段分别为 1.30 秒和 1.31 秒。续会话资料题中有两次答对数值但跳过要求的重新读取。DSH 和 DeepTutor 的有效样本不足以判断加速效果。[完整报告](benchmarks/2026-11-19/report.zh-CN.md) · [逐次测量数据](benchmarks/2026-11-19/trials.csv)
+
+## 最新部署检查
+
+2026-11-19，1.1.0 核心已从提交 `574da68` 同步到 Codex、Claude Code、DeepSeek Harness、DeepTutor 和共享 Agent 镜像。所有安装副本都与公开文件 SHA-256 一致；协议校验 45/45、速度参数矩阵 40/40，DeepTutor 技能服务也已枚举出核心与常驻 router。报告同时记录了尚待各宿主新会话确认的项目，以及额外工作流和 token 开销可能拖慢短任务的风险。[部署报告](reports/2026-11-19-installation-sync.zh-CN.md) · [机器可读清单](reports/2026-11-19-installation-sync.json)

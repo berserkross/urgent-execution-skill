@@ -175,3 +175,7 @@ For custom Codex app-server clients, see [the optional turn parameter helper](ad
 ## Measured performance
 
 In a Claude Code test through a DeepSeek V4 Pro gateway, the median time to finish a fixed 320-token answer was 4.30 s without the skill and 6.26 s on first activation (five runs per condition). Visible output took 1.30 s and 1.31 s respectively. Two resumed file-review trials returned the correct numbers but skipped the requested reread. The DSH and DeepTutor samples were too small to establish a speed effect. [Full report (Chinese)](benchmarks/2026-11-19/report.zh-CN.md) · [Per-trial data](benchmarks/2026-11-19/trials.csv)
+
+## Latest installation check
+
+On 2026-11-19, the 1.1.0 core was synchronized from commit `574da68` into Codex, Claude Code, DeepSeek Harness, DeepTutor, and the shared agent mirror. Installed copies matched the published SHA-256; the protocol validator passed 45/45 checks, the Fast parameter matrix passed 40/40, and DeepTutor's skill service enumerated both the core and always-on router. The report also records the remaining per-host reload checks and the risk that added workflow and token overhead can slow short tasks. [Deployment report](reports/2026-11-19-installation-sync.md) · [Machine-readable manifest](reports/2026-11-19-installation-sync.json)
