@@ -7,6 +7,10 @@
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-11-19
+
+- Session-scoped native Fast preference, optional Codex request helper, bilingual setup notes and automated protocol checks.
+
 ### Added
 
 - README 增加“为什么用这个口令”一节，说明低频词、全角中括号与首行独占的误触发防护。

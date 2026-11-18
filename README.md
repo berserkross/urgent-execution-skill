@@ -4,7 +4,7 @@
 
 > A session-scoped execution-speed skill for AI agents: one line to turn it on, one line to turn it off.
 
-![version](https://img.shields.io/badge/version-1.0.0-blue)
+![version](https://img.shields.io/badge/version-1.1.0-blue)
 ![license](https://img.shields.io/badge/license-MIT-green)
 ![hosts](https://img.shields.io/badge/hosts-Claude%20Code%20%7C%20DSH%20%7C%20Codex%20%7C%20DeepTutor-8A2BE2)
 
@@ -150,7 +150,7 @@ Minimal checks (the full A01–A20 matrix is in [02-编写迭代与验证报告.
 
 ## Versioning
 
-Current version: **1.0.0**. See [CHANGELOG.md](CHANGELOG.md).
+Current version: **1.1.0**. See [CHANGELOG.md](CHANGELOG.md).
 
 ## Contributing
 
@@ -163,3 +163,11 @@ Issues and pull requests are welcome. If you change the activation protocol or e
 ## Chinese documentation
 
 The Chinese README is at [README.zh-CN.md](README.zh-CN.md), and the Chinese installation guide is at [INSTALL.zh-CN.md](INSTALL.zh-CN.md). The detailed installation and validation documents are currently in Chinese: [03-通用安装交付文档.md](03-通用安装交付文档.md) and [02-编写迭代与验证报告.md](02-编写迭代与验证报告.md).
+
+### Native Fast and workflow speed
+
+The core is portable to agents that can load Markdown instructions. The four documented hosts are examples. Another host can connect the same activation protocol to its own instruction entry point.
+
+The activation line expresses a preference for Fast in the current session. A trusted submitting client can request it before a new turn when the selected model advertises Fast. Keep the selected model and reasoning effort. On exit, omit the override and inherit the user's current speed. The standard Markdown installation accelerates the workflow and leaves native speed selection to the user. Report a request as confirmed only when the service reports the tier actually used.
+
+For custom Codex app-server clients, see [the optional turn parameter helper](adapters/codex_speed.py). The standard desktop installer does not register a request interceptor. Other hosts use the shared workflow until their request paths are verified.

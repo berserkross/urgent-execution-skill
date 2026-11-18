@@ -4,7 +4,7 @@
 
 > 给 AI Agent 的会话级执行加速技能：一行开启，一行退出；只作用于当前会话。
 
-![version](https://img.shields.io/badge/version-1.0.0-blue)
+![version](https://img.shields.io/badge/version-1.1.0-blue)
 ![license](https://img.shields.io/badge/license-MIT-green)
 ![hosts](https://img.shields.io/badge/hosts-Claude%20Code%20%7C%20DSH%20%7C%20Codex%20%7C%20DeepTutor-8A2BE2)
 
@@ -150,7 +150,7 @@ ON 时，技能要求 Agent 在满足显性需求和必要验证的前提下，�
 
 ## 版本与变更
 
-当前版本：**1.0.0**。变更记录见 [CHANGELOG.md](CHANGELOG.md)。
+当前版本：**1.1.0**。变更记录见 [CHANGELOG.md](CHANGELOG.md)。
 
 ## 贡献
 
@@ -163,3 +163,11 @@ ON 时，技能要求 Agent 在满足显性需求和必要验证的前提下，�
 ## English
 
 A full English README is available at [README.md](README.md); the English installation guide is at [INSTALL.md](INSTALL.md).
+
+### 原生 Fast 与工作流加速
+
+核心适用于能够加载 Markdown 指令的 Agent。四个已列宿主提供安装示例。其他宿主可将共享路由接入自己的指令入口。
+
+开启口令同时表达当前会话对原生 Fast 的偏好。只有在可信提交端已识别本人首行、确认会话为 ON、查明当前模型提供 Fast，且能按新一轮请求覆盖速度时，才请求原生 Fast。沿用用户选择的模型和推理强度，优先尊重手动指定的速度。读到本技能时，当轮推理通常已开始。仅有 Markdown 路由时执行工作流加速，可在首次开启时提示用户用宿主速度选择器手动选择 Fast。不得把模型读到了口令当作当轮请求已加速的证据。
+
+Codex app-server 客户端可在 turn/start 前使用仓库的 adapters/codex_speed.py。该函数仅生成参数，需由拥有请求入口的客户端接入。仅在本会话 ON 时为新轮次设置 serviceTierForTurn。退出时停止附加覆盖，继承用户当前设置并继续任务。状态或原速度未知、用户正在引导已开始的一轮、目录不支持 Fast 时，保留原选择。仅在有服务端实际档位回执时报告“已生效”，只有发出请求的证据时报告“已请求”。标准桌面安装提供策略与手动速度选择。Claude Code、DSH、DeepTutor 继续使用通用策略；原生档位需各自验证。

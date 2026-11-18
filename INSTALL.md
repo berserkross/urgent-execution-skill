@@ -205,3 +205,9 @@ Ask the agent to show you the paths and the verification output. If it claims st
 - Codex: delete `<CODEX_HOME>/skills/urgent-execution/`; remove the route block from `<CODEX_HOME>/AGENTS.md`.
 - DeepTutor: delete `<skill-root>/urgent-execution/` and `<skill-root>/urgent-execution-router/`.
 - The core `SKILL.md` is unchanged; no credentials or settings are touched.
+
+### Native Fast and workflow speed
+
+The activation line expresses a preference for Fast in the current session. A trusted submitting client can request it before a new turn when the selected model advertises Fast. Keep the selected model and reasoning effort. On exit, omit the override and inherit the user's current speed. The standard Markdown installation accelerates the workflow and leaves native speed selection to the user. Report a request as confirmed only when the service reports the tier actually used.
+
+For custom Codex app-server clients, see [the optional turn parameter helper](adapters/codex_speed.py). The standard desktop installer does not register a request interceptor. Other hosts use the shared workflow until their request paths are verified.
